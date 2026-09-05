@@ -11,10 +11,11 @@ const vehicles = [
 ] as const
 
 const tenures = [3, 6, 9, 12, 24, 36] as const
+type Tenure = typeof tenures[number]
 
 export default function IndividualLeasing() {
   const [vehicle, setVehicle] = useState(0)
-  const [tenure, setTenure] = useState(12)
+  const [tenure, setTenure] = useState<Tenure>(12)
   const selected = vehicles[vehicle]
   const monthly = useMemo(() => selected.monthly[tenures.indexOf(tenure)], [selected, tenure])
 
