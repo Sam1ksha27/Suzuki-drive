@@ -20,11 +20,14 @@ export default function SiteHeader() {
 
   return (
     <header className="header">
-      <Link className="brand" href="/" aria-label="Suzuki Drive home">
+      <div className="brand" aria-label="Suzuki Drive">
         <span className="smark">S</span><span>SUZUKI <b>DRIVE</b></span>
-      </Link>
+      </div>
 
       <nav className="nav">
+        {links.slice(0, 1).map(([href, label]) => (
+          <Link key={href} className={pathname === href ? 'navActive' : ''} href={href}>{label}</Link>
+        ))}
         <details className="navDrop">
           <summary className={pathname.startsWith('/leasing') ? 'navActive' : ''}>Leasing <ChevronDown size={13} /></summary>
           <div className="navMenu">
@@ -32,7 +35,7 @@ export default function SiteHeader() {
             <Link href="/corporate">Corporate Leasing</Link>
           </div>
         </details>
-        {links.map(([href, label]) => (
+        {links.slice(1).map(([href, label]) => (
           <Link key={href} className={pathname === href ? 'navActive' : ''} href={href}>{label}</Link>
         ))}
       </nav>
@@ -44,9 +47,10 @@ export default function SiteHeader() {
 
       <button className="hamb" aria-label="Open menu" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
       {open && <div className="mobileNav">
+        <Link href="/" onClick={() => setOpen(false)}>Home</Link>
         <Link href="/leasing/individual" onClick={() => setOpen(false)}>Individual Leasing</Link>
         <Link href="/corporate" onClick={() => setOpen(false)}>Corporate Leasing</Link>
-        {links.map(([href, label]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}
+        {links.slice(1).map(([href, label]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}
         <Link href="/login" onClick={() => setOpen(false)}>Login</Link>
       </div>}
     </header>
