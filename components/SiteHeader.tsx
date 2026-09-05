@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { ChevronDown, Menu, X } from 'lucide-react'
 
 const links = [
+  ['/', 'Home'],
   ['/range', 'Explore EVs'],
   ['/corporate', 'Corporate'],
   ['/sustainability', 'Sustainability'],
